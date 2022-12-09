@@ -1,6 +1,7 @@
 # Welcome to Remix!
 
 - [Remix Docs](https://remix.run/docs)
+- https://javascript.info/server-sent-events
 
 ## Fly Setup
 
