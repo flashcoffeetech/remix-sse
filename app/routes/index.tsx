@@ -8,6 +8,13 @@ export default function Index() {
   const [weather, setWeather] = React.useState('')
   const [todo, setTodo] = React.useState<any>({})
 
+  if(typeof(EventSource) !== "undefined") {
+    // Yes! Server-sent events support!
+    // Some code.....
+  } else {
+    // Sorry! No server-sent events support..
+  }
+
   React.useEffect(() => {
     const source = new EventSource(url)
     source.addEventListener('open', () => {
@@ -54,8 +61,11 @@ export default function Index() {
       console.log('SSE todo opened!');
     });
 
-    source.addEventListener('message', ({data}) => {
-      setTodo(JSON.parse(data));
+   source.addEventListener('todo', function(e) {
+      const obj = JSON.parse(e.data);
+      console.log(e);
+      console.log("todo", e.data)
+      setTodo(obj);
     });
 
     return () => {
